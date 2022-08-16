@@ -59,6 +59,14 @@ defmodule Opencov.Router do
 
   scope "/", Opencov do
     pipe_through :browser
+
+    resources "/projects", ProjectController
+    resources "/builds", BuildController, only: [:show]
+    resources "/files", FileController, only: [:show]
+  end
+
+  scope "/", Opencov do
+    pipe_through :browser
     pipe_through :authenticate
 
     delete "/logout", AuthController, :logout
@@ -72,10 +80,6 @@ defmodule Opencov.Router do
       get "/profile/password/edit", ProfileController, :edit_password
       put "/profile/password", ProfileController, :update_password
     end
-
-    resources "/projects", ProjectController
-    resources "/builds", BuildController, only: [:show]
-    resources "/files", FileController, only: [:show]
 
     resources "/jobs", JobController, only: [:show]
   end
