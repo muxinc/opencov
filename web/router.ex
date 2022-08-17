@@ -63,6 +63,7 @@ defmodule Opencov.Router do
     resources "/projects", ProjectController
     resources "/builds", BuildController, only: [:show]
     resources "/files", FileController, only: [:show]
+    resources "/jobs", JobController, only: [:show]
   end
 
   scope "/", Opencov do
@@ -80,8 +81,6 @@ defmodule Opencov.Router do
       get "/profile/password/edit", ProfileController, :edit_password
       put "/profile/password", ProfileController, :update_password
     end
-
-    resources "/jobs", JobController, only: [:show]
   end
 
   scope "/admin", Opencov.Admin, as: :admin do
